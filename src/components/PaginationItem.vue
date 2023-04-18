@@ -1,22 +1,11 @@
 <template>
   <ul class="pagination">
     <li class="pagination__item pagination__item--previous">
-      <a href="#"><ArrowIcon /></a>
+      <button @click="$emit('prevPage')" :disabled="pageNo <= 1"><ArrowIcon /></button>
     </li>
-    <li class="pagination__item pagination__item--active">
-      <a href="#">1</a>
-    </li>
-    <li class="pagination__item">
-      <a href="#">2</a>
-    </li>
-    <li class="pagination__item">
-      <a href="#">3</a>
-    </li>
-    <li class="pagination__item">
-      <a href="#">4</a>
-    </li>
+    <p class="pagination__label">Page {{ pageNo }}</p>
     <li class="pagination__item pagination__item--next">
-      <a href="#"><ArrowIcon /></a>
+      <button @click="$emit('nextPage')"><ArrowIcon /></button>
     </li>
   </ul>
 </template>
@@ -26,6 +15,10 @@ import ArrowIcon from './icons/IconArrow.vue'
 export default {
   components: {
     ArrowIcon
+  },
+  emits: ['prevPage', 'nextPage'],
+  props: {
+    pageNo: Number
   }
 }
 </script>
@@ -38,12 +31,16 @@ export default {
   justify-content: center;
   margin-top: 3rem;
 
+  &__label {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+
   &__item {
-    margin-right: 1rem;
     border-radius: 50%;
     border: solid 1px var(--c-light-grey);
 
-    a {
+    button {
       border-radius: 50%;
       height: 2.7rem;
       width: 2.7rem;
@@ -52,15 +49,21 @@ export default {
       justify-content: center;
       text-decoration: none;
       color: var(--text-color);
+      border: none;
       &:hover {
         background-color: var(--c-light-grey);
       }
-    }
-    &--active {
-      background-color: var(--c-light-grey);
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.3;
+      }
+      @media (max-width: 768px) {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
     }
     &--next {
-      a svg {
+      button svg {
         transform: rotate(180deg);
       }
     }

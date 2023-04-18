@@ -4,7 +4,7 @@
       <div class="search-box__label">Search Staff:</div>
       <div class="search-box__input-wrapper">
         <input type="text" placeholder="Example: Christine" v-model="query" />
-        <button title="Submit a search query">
+        <button title="Submit a search query" @click="$emit('')">
           <SearchIcon />
         </button>
       </div>
@@ -39,15 +39,27 @@ export default {
     text-transform: uppercase;
     color: var(--c-text-color);
     margin-right: 1rem;
+    @media (max-width: 768px) {
+      font-size: 0.875rem;
+      margin: 0 0 0.5rem;
+    }
   }
   &__input {
     display: flex;
     align-items: center;
     width: 60%;
+    @media (max-width: 768px) {
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
   &__input-wrapper {
     display: flex;
     flex-grow: 1;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
     input {
       appearance: none;
       border: none;

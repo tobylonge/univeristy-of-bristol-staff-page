@@ -1,22 +1,23 @@
 <template>
   <div class="staff-result">
-    <div class="staff-result__count">Showing 1100 Staffs</div>
-    <div class="staff-result__wrapper">
-      <StaffItem />
-      <StaffItem />
-      <StaffItem />
+    <div class="staff-result__count" v-if="data?.info?.results">
+      Showing {{ data.info.results }} Staffs per page
     </div>
-    <PaginationItem />
+    <div class="staff-result__wrapper" v-if="data?.results">
+      <StaffItem v-for="(staff, index) in data.results" :key="index" :staff="staff" />
+    </div>
   </div>
 </template>
 
 <script>
 import StaffItem from './StaffItem.vue'
-import PaginationItem from './PaginationItem.vue'
 export default {
   components: {
-    StaffItem,
-    PaginationItem
+    StaffItem
+  },
+
+  props: {
+    data: Object
   }
 }
 </script>
@@ -31,7 +32,13 @@ export default {
   &__wrapper {
     display: grid;
     grid-template-columns: auto auto auto;
-    gap: 1rem;
+    gap: 1.5rem 1rem;
+    @media (max-width: 1200px) {
+      grid-template-columns: auto auto;
+    }
+    @media (max-width: 768px) {
+      grid-template-columns: auto;
+    }
   }
 }
 </style>

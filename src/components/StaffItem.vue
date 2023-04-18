@@ -2,20 +2,21 @@
   <div class="staff-item">
     <div class="staff-item__profile-picture">
       <img
-        src="https://research-information.bris.ac.uk/ws/files/288843964/_1JJ0057_crop.jpg"
-        alt="title"
+        v-if="staff?.picture"
+        :src="staff.picture.large"
+        :alt="`${staff?.name?.first} ${staff?.name?.last}`"
       />
     </div>
     <div class="staff-item__details">
-      <h2>Dr John Doe</h2>
+      <h2>{{ staff?.name?.title }} {{ staff?.name?.first }} {{ staff?.name?.last }}</h2>
       <ul>
         <li>
           <EmailIcon height="18" width="18" />
-          <a href="#">Email</a>
+          <a href="#">{{ staff?.email }}</a>
         </li>
         <li>
           <PhoneIcon height="18" width="18" />
-          <a href="#">Phone</a>
+          <a href="#">{{ staff?.phone }}</a>
         </li>
       </ul>
     </div>
@@ -29,6 +30,9 @@ export default {
   components: {
     EmailIcon,
     PhoneIcon
+  },
+  props: {
+    staff: Object
   }
 }
 </script>
@@ -39,6 +43,10 @@ export default {
   display: flex;
   align-items: center;
   padding: 1rem;
+  @media (max-width: 468px) {
+    flex-direction: column;
+  }
+
   &__profile-picture {
     img {
       // max-width: 100%;
