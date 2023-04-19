@@ -24,15 +24,19 @@ export default {
 
   setup() {
     const pageNo = ref(1)
+
+    // Returns data from usefetch composable
     const { data, error, loadData } = useFetch()
 
     loadData(pageNo.value)
 
+    //Function to get previous page number and load content for it
     const getPrevPage = () => {
       pageNo.value = Number(pageNo.value) - 1
       loadData(pageNo.value)
     }
 
+    //Function to get next page number and load content for it
     const getNextPage = () => {
       pageNo.value = Number(pageNo.value) + 1
       loadData(pageNo.value)

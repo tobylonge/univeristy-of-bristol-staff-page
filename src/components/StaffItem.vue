@@ -10,13 +10,13 @@
     <div class="staff-item__details">
       <h2>{{ staff?.name?.title }} {{ staff?.name?.first }} {{ staff?.name?.last }}</h2>
       <ul>
-        <li>
+        <li v-if="staff?.email">
           <EmailIcon height="18" width="18" />
-          <a href="#">{{ staff?.email }}</a>
+          <a :href="`mailto:${staff.email}`">{{ staff.email }}</a>
         </li>
-        <li>
+        <li v-if="staff?.phone">
           <PhoneIcon height="18" width="18" />
-          <a href="#">{{ staff?.phone }}</a>
+          <a :href="`tel:${staff.phone}`">{{ staff.phone }}</a>
         </li>
       </ul>
     </div>
@@ -59,7 +59,7 @@ export default {
   &__details {
     margin-left: 1rem;
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 500;
       font-family: Rokkitt, Helvetica, serif;
     }

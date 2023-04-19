@@ -4,7 +4,7 @@
       <div class="search-box__label">Search Staff:</div>
       <div class="search-box__input-wrapper">
         <input type="text" placeholder="Example: Christine" v-model="query" />
-        <button title="Submit a search query" @click="$emit('')">
+        <button title="Submit a search query" aria-label="Search" @click="$emit('')">
           <SearchIcon />
         </button>
       </div>
